@@ -1,0 +1,26 @@
+/* 诗歌正文精确样式 */
+.poem-text {
+    font-family: "仿宋", "FangSong", "STFangsong", "华文仿宋", serif;
+    font-size: 1.2em;  /* 加大字号 */
+    line-height: 2.0;  /* 增加行高使文字更瘦高 */
+    letter-spacing: 0.05em;
+    margin: 2em 0 !important;  /* 强制前后空行 */
+    padding: 1em 0;
+    text-align: center;
+    white-space: pre-line; /* 保留换行 */
+    display: block;
+}
+
+/* 确保空行显示 */
+.poem-text::before,
+.poem-text::after {
+    content: "" !important;
+    display: block !important;
+    height: 1.5em !important;
+}
+
+/* 整体文章内容加大字号 */
+.post-content {
+    font-size: 1.1em;  /* 整体加大字号 */
+    line-height: 1.7;
+}

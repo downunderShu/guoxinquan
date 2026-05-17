@@ -1,0 +1,124 @@
+baseURL: "https://guoxinquan.net/"
+title: "郭鑫铨｜凡砚楼文存"
+theme: "PaperMod"
+
+languageCode: "zh-cn"
+defaultContentLanguage: "zh-cn"
+hasCJKLanguage: true
+enableRobotsTXT: true
+enableEmoji: true
+
+author:
+  name: "郭鑫铨"
+  email: "shuguo.archi@gmail.com"
+
+disableKinds:
+- "RSS"
+- "sitemap"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+taxonomies:
+  category: categories
+  tag: tags
+
+# 语言配置
+languages:
+  zh-cn:
+    languageName: "中文"
+    title: "郭鑫铨｜凡砚楼文存"
+    weight: 1
+
+# 分类配置
+taxonomies:
+  category: "categories"
+  tag: "tags"
+
+# 主题参数
+params:
+  assets:
+    customCSS: 
+      - "css/extended/poetry.css"
+
+  # 使用主页信息模式
+  profileMode:
+    enabled: false
+
+  # 启用主页信息
+  homeInfoParams:
+    enabled: true
+    Title: "郭鑫铨教授"
+    Content: |
+      全国优秀教师、云南省突出贡献专家
+      
+      长期致力于语文教学研究、汉字学及云南地方文化
+      著述丰硕，诗书兼修
+
+  # 基本设置
+  description: "郭鑫铨教授文集 - 凡砚楼文存"
+  
+  # 日期和阅读设置
+  dateFormat: "2006年1月2日"
+  showReadingTime: false
+  showWordCount: false
+  
+  # 文章设置
+  showToc: false
+  comments: false
+  cover:
+    hidden: true
+  
+  # 其他设置
+  favicon: "/favicon.ico"
+  defaultTheme: "light"
+  displayFullLangName: true
+
+  # 日期显示配置
+  displayDate: true
+  displayDateUpdated: false
+  showReadingTime: false
+  showWordCount: false
+  
+  # PaperMod 特定配置
+  disableMicroformat: true  # 禁用微格式，可能解决HTML包装问题
+  
+  # 日期格式
+  dateFormat: "2006年1月2日"
+
+# 全局配置
+  enableRobotsTXT: true
+  buildDrafts: false
+  buildFuture: false
+  buildExpired: false
+
+
+# 菜单配置
+menu:
+  main:
+    - identifier: "home"
+      name: "首页"
+      url: "/"
+      weight: 1
+    - identifier: "monographs"
+      name: "专著"
+      url: "/categories/专著/"
+      weight: 2
+    - identifier: "poetry"
+      name: "诗词"
+      url: "/categories/诗词/"
+      weight: 3
+    - identifier: "essays"
+      name: "杂文"
+      url: "/categories/杂文/"
+      weight: 4
+    - identifier: "calligraphy"
+      name: "书法"
+      url: "/categories/书法/"
+      weight: 5
+    - identifier: "about"
+      name: "关于"
+      url: "/about/"
+      weight: 6

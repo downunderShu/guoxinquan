@@ -1,0 +1,81 @@
+{{- define "main" }}
+
+<article class="post-single">
+  <header class="post-header">
+    {{ partial "breadcrumbs.html" . }}
+
+    <h1 class="post-title">
+      {{ .Title }}
+      {{ with .Params.title_note }}
+        <span class="title-note">{{ . }}</span>
+      {{ end }}
+      {{- if .Draft }}&nbsp;&nbsp;[draft]{{- end }}
+    </h1>
+
+    {{/* 分类（categories）行 */}}
+    {{- $catTaxonomy := .Language.Params.Taxonomies.category | default "categories" }}
+    {{- $cats := $.GetTerms $catTaxonomy }}
+    {{- if $cats }}
+      <div class="post-cats">
+        {{- range $index, $cat := $cats }}
+          {{- if gt $index 0 }} · {{ end -}}
+          <a href="{{ $cat.RelPermalink }}">{{ $cat.LinkTitle }}</a>
+        {{- end }}
+      </div>
+    {{- end }}
+
+    {{- if .Description }}
+      <div class="post-description">
+        {{ .Description }}
+      </div>
+    {{- end }}
+
+    {{- if not (.Param "hideMeta") }}
+      <div class="post-meta">
+        {{- partial "post_meta.html" . -}}
+        {{- partial "translation_list.html" . -}}
+        {{- partial "edit_post.html" . -}}
+        {{- partial "post_canonical.html" . -}}
+      </div>
+    {{- end }}
+  </header>
+
+  {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
+
+  {{- if .Content }}
+    <div class="post-content">
+      {{- if not (.Param "disableAnchoredHeadings") }}
+        {{- partial "anchored_headings.html" .Content -}}
+      {{- else }}
+        {{ .Content }}
+      {{- end }}
+    </div>
+  {{- end }}
+
+  <footer class="post-footer">
+    {{- $tagsTaxonomy := .Language.Params.Taxonomies.tag | default "tags" }}
+    {{- $terms := $.GetTerms $tagsTaxonomy }}
+    {{- if $terms }}
+      <ul class="post-tags">
+        {{- range $terms }}
+          <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+        {{- end }}
+      </ul>
+    {{- end }}
+
+    {{- if (.Param "ShowPostNavLinks") }}
+      {{- partial "post_nav_links.html" . }}
+    {{- end }}
+
+    {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+      {{- partial "share_icons.html" . -}}
+    {{- end }}
+
+    {{- if (.Param "comments") }}
+      {{- partial "comments.html" . }}
+    {{- end }}
+  </footer>
+</article>
+
+{{- end }}{{/* end main */}}

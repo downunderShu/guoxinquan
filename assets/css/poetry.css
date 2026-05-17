@@ -1,0 +1,72 @@
+/* 诗词专用样式 */
+.poem-container {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 800px;
+  font-family: "SimSun", "STSong", serif;
+  line-height: 1.8;
+}
+
+.poem-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.poem-subtitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1.5rem 0 1rem 0;
+  text-align: center;
+}
+
+.poem-content {
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.poem-line {
+  text-align: center;
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  min-height: 1.5em;
+}
+
+.poem-line.with-notes {
+  text-align: left;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.poem-date {
+  text-align: right;
+  font-style: italic;
+  margin-top: 1.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.poem-notes {
+  text-align: left;
+  margin-top: 2rem;
+  padding-left: 2rem;
+  font-size: 0.95rem;
+  color: #555;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+.poem-note {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .poem-container {
+    margin: 1rem auto;
+    max-width: 95%;
+  }
+}

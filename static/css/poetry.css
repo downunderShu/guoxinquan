@@ -1,0 +1,176 @@
+/* =========================
+   统一控制：诗歌段落前后空隙
+   ========================= */
+
+:root {
+  /* 标题 / 分标题 / 前一块 → 诗歌正文之间的固定空隙 */
+  --poem-before-gap: 4rem;
+
+  /* 诗歌正文 → 下方【注】/附记之间的固定空隙 */
+  --poem-after-gap: 5rem;
+}
+
+/* =========================
+   诗歌正文样式（仿宋 + 微微拔高）
+   ========================= */
+
+/* 外层：只当“壳”，本身不参与排版行高 */
+.post-single .post-content .poem-text {
+  font-size: 0;             /* 容器本身不产生行高，防止空白行 */
+  line-height: 0;
+  margin-top: 0;            /* 前后空隙都不在这里控制 */
+  margin-bottom: 0;
+  white-space: normal;      /* 正常处理空白和换行 */
+}
+
+/* 内层：真正控制字体、行高和“拔高”效果 */
+.post-single .post-content .poem-text-inner {
+  display: inline-block;
+  font-family: "FangSong", "STFangsong", "SimSun", "Songti SC", serif;
+  font-size: 1.6rem;        /* 比正文稍大：用 rem 避免受父级 0 影响 */
+  line-height: 2.0;         /* 行距偏大，配合 scaleY 营造瘦高感 */
+  text-align: left;
+
+  transform: scaleY(1.15);  /* 稍微拔高字形，可继续微调 1.10~1.20 */
+  transform-origin: top left;
+}
+
+/* 若以后用 <p> 分句，不让 <p> 自己加 margin */
+.post-single .post-content .poem-text p {
+  margin: 0;
+}
+
+/* 诗内注释符：变小且不拉高整行 */
+.post-single .post-content .poem-text sup,
+.post-single .post-content .poem-text .note-ref {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.6em;
+  line-height: 1;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.5em;
+}
+
+/* =========================
+   标题上的注释号（title_note）
+   ========================= */
+
+.post-single .post-title .title-note {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.6em;
+  line-height: 1;
+  vertical-align: text-top;
+  margin-left: 0.2em;
+  position: relative;
+  top: -0.2em;
+}
+
+/* =========================
+   正文段落自身及与 block 间距（略微收紧）
+   ========================= */
+
+.post-single .post-content p,
+.post-single .post-content blockquote,
+.post-single .post-content ul,
+.post-single .post-content ol,
+.post-single .post-content dl,
+.post-single .post-content table,
+.post-single .post-content pre {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+/* 分隔线（注释中的 --- 等）上下间距 */
+.post-single .post-content hr {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+
+/* 去掉整篇最底部多余空白 */
+.post-single .post-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* =========================
+   标题区与正文之间：轻微收紧 + 控制首首诗的 before-gap
+   ========================= */
+
+/* 整个 header 底部 → 第一首诗 / 第一块内容 的空隙 */
+.post-single .post-header {
+  margin-top: 0;
+  margin-bottom: var(--poem-before-gap);
+}
+
+/* 主标题本身与日期之间：保持很小的缝即可 */
+.post-single .post-title {
+  margin-top: 0;
+  margin-bottom: 0.1em;   /* 只影响标题 ↔ 日期，不用变量 */
+}
+
+/* 分类 + 日期上下都贴紧一点 */
+.post-single .post-cats,
+.post-single .post-meta {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 0.85em;
+  line-height: 1.2;
+}
+
+/* ★ 隐藏主标题和日期之间的分类行（“诗词”等） */
+.post-single .post-header .post-cats {
+  display: none;
+}
+
+/* =========================
+   子标题中的注释号（h2/h3/h4 上的 note-ref）
+   ========================= */
+
+.post-single .post-content h2 .note-ref,
+.post-single .post-content h3 .note-ref,
+.post-single .post-content h4 .note-ref {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.6em;          /* 相对标题字号缩小 */
+  line-height: 1;
+  vertical-align: super;     /* 像真正上标一样贴到右上角 */
+}
+
+/* 子标题本身的间距：与上一段保持一点距离，向下空隙交给 --poem-before-gap 控制 */
+.post-single .post-content h2,
+.post-single .post-content h3,
+.post-single .post-content h4 {
+  margin-top: 4em;         /* 分标题与上一段之间的距离（你可以按需要再调） */
+  margin-bottom: 2em;        /* 往下到诗的空隙统一交给 --poem-before-gap */
+}
+
+/* =========================
+   统一控制：诗歌段落“前”和“后”的空隙
+   ========================= */
+
+/* 1. 诗歌“前”的空隙 ---------------------------------- */
+
+/* 第一首诗：如果首块就是 poem-text（标题后直接是诗） */
+.post-single .post-header + .post-content > .poem-text {
+  margin-top: 0 !important;   /* header 自己的 margin-bottom 已经是 before-gap */
+}
+
+/* 组诗中：分标题/说明文字后紧跟的 poem-text */
+.post-single .post-content h2 + .poem-text,
+.post-single .post-content h3 + .poem-text,
+.post-single .post-content h4 + .poem-text,
+.post-single .post-content p + .poem-text,
+.post-single .post-content div + .poem-text {
+  margin-top: var(--poem-before-gap) !important;
+}
+
+/* 2. 诗歌“后”的空隙 ---------------------------------- */
+
+/* 紧跟在 poem-text 后面的第一块：通常是【注】、附记、小标题、横线等 */
+.post-single .post-content .poem-text + p,
+.post-single .post-content .poem-text + h2,
+.post-single .post-content .poem-text + h3,
+.post-single .post-content .poem-text + h4,
+.post-single .post-content .poem-text + hr,
+.post-single .post-content .poem-text + div {
+  margin-top: var(--poem-after-gap) !important;
+}
+
